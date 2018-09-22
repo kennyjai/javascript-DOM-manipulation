@@ -42,8 +42,7 @@ console.log(data);
 //   });
 // });
 
-// // Step 5: Use d3 to update each cell's text with
-// // weather report values (weekday, date, high, low)
+// // Step 5: Use d3 to update each cell's text with ufo report values 
 // data.forEach(function(ufoReport) {
 //   console.log(ufoReport);
 //   var row = tbody.append("tr");
@@ -68,31 +67,29 @@ data.forEach((ufoReport) => {
 // Getting a reference to the date filter button with the id 'filter-btn'
 var filterButton = d3.select("#filter-btn");
 
-// Select the input element on the page with the id property 'datetime'
-var inputField = d3.select("#datetime");
-
-// Create a custom function to return data that matches the date
-function dateFilter(ufo) {
-	return ufo.datetime == inputField;
-}
-
 // Create a function to filter data once we click on the filter button
 filterButton.on("click", function() {
 
 	// Prevent the page from refreshing
 	d3.event.preventDefault();
 
-	// Call the custom function with filter()
-	var filteredData = tableData.filter(dateFilter);
+	// Select the raw input element and get the raw HTML node
+	var inputField = d3.select("#datetime");
 
 	// Get the value property of the input element
-	// var inputValue = inputElement.property("value");
+	var inputValue = inputField.property("value");
+
+	console.log(inputValue);
+	console.log(tableData)
+
+	// Call the custom function with filter()
+	var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
 
 	// Display the results
 	console.log(filteredData);
 
 	// append to table only filtered data
-	// newData.forEach((ufoReport) => {
+	// filteredData.forEach((ufoReport) => {
 	//   var row = tbody.append("tr");
 	//   Object.entries(ufoReport).forEach(([key, value]) => {
 	//     var cell = tbody.append("td");
