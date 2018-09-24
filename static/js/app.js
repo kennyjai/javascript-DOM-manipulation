@@ -68,7 +68,7 @@ cityBtn.on("click", function() {
 	console.log(inputValue);
 
 	// function with filter() to get filtered data
-	var filteredData = tableData.filter(ufo => ufo.city === inputValue);
+	var filteredData = tableData.filter(ufo => ufo.city.toUpperCase() === inputValue.toUpperCase());
 	console.log(filteredData);
 
 	// Remove all the pre-existing data from the table
@@ -90,7 +90,7 @@ stateBtn.on("click", function() {
 	console.log(inputValue);
 
 	// function with filter() to get filtered data
-	var filteredData = tableData.filter(ufo => ufo.state === inputValue);
+	var filteredData = tableData.filter(ufo => ufo.state.toUpperCase() === inputValue.toUpperCase());
 	console.log(filteredData);
 
 	// Remove all the pre-existing data from the table
@@ -112,7 +112,7 @@ countryBtn.on("click", function() {
 	console.log(inputValue);
 
 	// function with filter() to get filtered data
-	var filteredData = tableData.filter(ufo => ufo.country === inputValue);
+	var filteredData = tableData.filter(ufo => ufo.country.toUpperCase() === inputValue.toUpperCase());
 	console.log(filteredData);
 
 	// Remove all the pre-existing data from the table
@@ -134,7 +134,7 @@ shapeBtn.on("click", function() {
 	console.log(inputValue);
 
 	// function with filter() to get filtered data
-	var filteredData = tableData.filter(ufo => ufo.shape === inputValue);
+	var filteredData = tableData.filter(ufo => ufo.shape.toUpperCase() === inputValue.toUpperCase());
 	console.log(filteredData);
 
 	// Remove all the pre-existing data from the table
