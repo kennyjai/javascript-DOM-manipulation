@@ -7,100 +7,139 @@ var tbody = d3.select("tbody");
 // Console.log the ufo data from data.js
 console.log(data);
 
-// // Step 1: Loop Through `data` and console.log each ufo report object
-// data.forEach(function(ufoReport) {
-//   console.log(ufoReport);
-// });
+// Create a buildTable function to build data from data.js
+function buildTable(data) {
+	data.forEach((ufoReport) => {
+	  var row = tbody.append("tr");
+	  Object.entries(ufoReport).forEach(([key, value]) => {
+	    var cell = tbody.append("td");
+	    cell.text(value);
+	  });
+	});
+};
 
-// // Step 2:  Use d3 to append one table row `tr` for each ufo report object
-// // Don't worry about adding cells or text yet, just try appending the `tr` elements.
-// data.forEach(function(ufoReport) {
-//   console.log(ufoReport);
-//   var row = tbody.append("tr");
-// });
+// Build the table for the first time on page load
+buildTable(tableData);
 
-// // Step 3:  Use `Object.entries` to console.log each weather report value
-// data.forEach(function(ufoReport) {
-//   console.log(ufoReport);
-//   var row = tbody.append("tr");
-
-//   Object.entries(ufoReport).forEach(function([key, value]) {
-//     console.log(key, value);
-//   });
-// });
-
-// // Step 4: Use d3 to append 1 cell per weather report value (weekday, date, high, low)
-// data.forEach(function(ufoReport) {
-//   console.log(ufoReport);
-//   var row = tbody.append("tr");
-
-//   Object.entries(ufoReport).forEach(function([key, value]) {
-//     console.log(key, value);
-//     // Append a cell to the row for each value
-//     // in the weather report object
-//     var cell = tbody.append("td");
-//   });
-// });
-
-// // Step 5: Use d3 to update each cell's text with ufo report values 
-// data.forEach(function(ufoReport) {
-//   console.log(ufoReport);
-//   var row = tbody.append("tr");
-//   Object.entries(ufoReport).forEach(function([key, value]) {
-//     console.log(key, value);
-//     // Append a cell to the row for each value
-//     // in the weather report object
-//     var cell = tbody.append("td");
-//     cell.text(value);
-//   });
-// });
-
-// Refactor to use Arrow Functions!
-data.forEach((ufoReport) => {
-  var row = tbody.append("tr");
-  Object.entries(ufoReport).forEach(([key, value]) => {
-    var cell = tbody.append("td");
-    cell.text(value);
-  });
-});
-
-// Getting a reference to the date filter button with the id 'filter-btn'
-var filterButton = d3.select("#filter-btn");
+// Getting a reference for each filter button with the button id 
+var dateBtn = d3.select("#date-btn");
+var cityBtn = d3.select("#city-btn");
+var stateBtn = d3.select("#state-btn");
+var countryBtn = d3.select("#country-btn");
+var shapeBtn = d3.select("#shape-btn");
 
 // Create a function to filter data once we click on the filter button
-filterButton.on("click", function() {
+dateBtn.on("click", function() {
 
 	// Prevent the page from refreshing
 	d3.event.preventDefault();
 
 	// Select the raw input element and get the raw HTML node
-	var inputField = d3.select("#datetime");
+	var inputField = d3.select("#input-value");
 
 	// Get the value property of the input element
 	var inputValue = inputField.property("value");
 
+	// Console.log the inputValue
 	console.log(inputValue);
-	console.log(tableData)
 
 	// Call the custom function with filter()
 	var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
 
-	// Display the results
+	// Display the filtered data results
 	console.log(filteredData);
 
-	// append to table only filtered data
-	// filteredData.forEach((ufoReport) => {
-	//   var row = tbody.append("tr");
-	//   Object.entries(ufoReport).forEach(([key, value]) => {
-	//     var cell = tbody.append("td");
-	//     cell.text(value);
-	//   });
-	// });
+	// Remove all the pre-existing data from the table
+	tbody.selectAll("*").remove();
+
+	// Build the table again using filtered data
+	buildTable(filteredData);
 });
 
-// // output filtered dates to tbody
-// var output = d3.select("tbody");
+// Create a function to filter data by city
+cityBtn.on("click", function() {
 
+	// Prevent the page from refreshing
+	d3.event.preventDefault();
 
+	// Get input values
+	var inputField = d3.select("#input-value");
+	var inputValue = inputField.property("value");
+	console.log(inputValue);
 
+	// function with filter() to get filtered data
+	var filteredData = tableData.filter(ufo => ufo.city === inputValue);
+	console.log(filteredData);
 
+	// Remove all the pre-existing data from the table
+	tbody.selectAll("*").remove();
+
+	// Build the table again using filtered data
+	buildTable(filteredData);
+});
+
+// Create a function to filter data by state
+stateBtn.on("click", function() {
+
+	// Prevent the page from refreshing
+	d3.event.preventDefault();
+
+	// Get input values
+	var inputField = d3.select("#input-value");
+	var inputValue = inputField.property("value");
+	console.log(inputValue);
+
+	// function with filter() to get filtered data
+	var filteredData = tableData.filter(ufo => ufo.state === inputValue);
+	console.log(filteredData);
+
+	// Remove all the pre-existing data from the table
+	tbody.selectAll("*").remove();
+
+	// Build the table again using filtered data
+	buildTable(filteredData);
+});
+
+// Create a function to filter data by country
+countryBtn.on("click", function() {
+
+	// Prevent the page from refreshing
+	d3.event.preventDefault();
+
+	// Get input values
+	var inputField = d3.select("#input-value");
+	var inputValue = inputField.property("value");
+	console.log(inputValue);
+
+	// function with filter() to get filtered data
+	var filteredData = tableData.filter(ufo => ufo.country === inputValue);
+	console.log(filteredData);
+
+	// Remove all the pre-existing data from the table
+	tbody.selectAll("*").remove();
+
+	// Build the table again using filtered data
+	buildTable(filteredData);
+});
+
+// Create a function to filter data by shape
+shapeBtn.on("click", function() {
+
+	// Prevent the page from refreshing
+	d3.event.preventDefault();
+
+	// Get input values
+	var inputField = d3.select("#input-value");
+	var inputValue = inputField.property("value");
+	console.log(inputValue);
+
+	// function with filter() to get filtered data
+	var filteredData = tableData.filter(ufo => ufo.shape === inputValue);
+	console.log(filteredData);
+
+	// Remove all the pre-existing data from the table
+	tbody.selectAll("*").remove();
+
+	// Build the table again using filtered data
+	buildTable(filteredData);
+});
